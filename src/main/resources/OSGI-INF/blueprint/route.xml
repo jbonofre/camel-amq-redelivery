@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 
+    <reference id="connectionFactory" interface="javax.jms.ConnectionFactory"/>
+
     <bean id="forced" class="java.lang.IllegalArgumentException">
-        <constructor-arg index="0" value="This is forced" />
+        <argument value="This is forced" />
     </bean>
 
     <bean id="noErrorHandler" class="org.apache.camel.builder.NoErrorHandlerBuilder"/>
 
-    <camelContext errorHandlerRef="noErrorHandler" xmlns="http://camel.apache.org/schema/blueprint">
-        <route>
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+        <route errorHandlerRef="noErrorHandler">
             <from uri="jms:queue:test?connectionFactory=#connectionFactory&amp;cacheLevelName=CACHE_CONSUMER&amp;acknowledgementModeName=CLIENT_ACKNOWLEDGE"/>
             <log message="Message received"/>
             <choice>

@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         DefaultCamelContext camelContext = new DefaultCamelContext();
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616?jms.redeliveryPolicy.maximumRedeliveries=5&jms.redeliveryPolicy.redeliveryDelay=84000");
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616?jms.redeliveryPolicy.maximumRedeliveries=5&jms.redeliveryPolicy.redeliveryDelay=1000");
         SimpleRegistry registry = new SimpleRegistry();
         registry.put("connectionFactory", connectionFactory);
         camelContext.setRegistry(registry);
